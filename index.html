@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Amor ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rosa:       #c2335a;
+      --rosa-claro: #fff0f4;
+      --rosa-med:   #f5b8c8;
+      --vinho:      #5a1e30;
+      --creme:      #fff8f9;
+      --texto:      #3a0d1a;
+      --texto-sec:  #8c3a52;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--creme);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(255,248,249,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 0.5px solid var(--rosa-med);
+    }
+    nav .logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--rosa); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; font-size: 14px; color: var(--texto-sec); transition: color .2s; }
+    nav ul a:hover { color: var(--rosa); }
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 2rem 4rem;
+      background: radial-gradient(ellipse at 60% 40%, #fce8ee 0%, var(--creme) 70%);
+      position: relative; overflow: hidden;
+    }
+    .hearts-bg { position: absolute; inset: 0; pointer-events: none; }
+    .heart-float {
+      position: absolute; opacity: 0;
+      animation: floatUp linear infinite;
+      user-select: none;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) scale(.8); opacity: 0; }
+      10%  { opacity: .2; }
+      80%  { opacity: .12; }
+      100% { transform: translateY(-60px) scale(1.1); opacity: 0; }
+    }
+    #hero .eyebrow {
+      font-size: 12px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--rosa); margin-bottom: 1.2rem; position: relative; z-index: 1;
+    }
+    #hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 7vw, 76px); font-weight: 600;
+      color: var(--vinho); line-height: 1.1; max-width: 700px;
+      position: relative; z-index: 1;
+    }
+    #hero h1 em { font-style: italic; color: var(--rosa); }
+    #hero .sub {
+      margin-top: 1.2rem; font-size: 18px; font-weight: 300;
+      color: var(--texto-sec); max-width: 420px;
+      position: relative; z-index: 1;
+    }
+    #hero .cta {
+      margin-top: 2.5rem; display: inline-block;
+      padding: 14px 36px; background: var(--rosa); color: #fff;
+      border-radius: 40px; font-size: 15px; font-weight: 500;
+      text-decoration: none; transition: background .2s, transform .15s;
+      position: relative; z-index: 1;
+    }
+    #hero .cta:hover { background: #a0294a; transform: translateY(-2px); }
+    #player-bar {
+      position: sticky; top: 60px; z-index: 90;
+      background: rgba(255,248,249,0.95); backdrop-filter: blur(10px);
+      border-bottom: 0.5px solid var(--rosa-med);
+      padding: .8rem 2rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    #play-pause {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--rosa); color: #fff; border: none;
+      font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background .2s, transform .15s;
+    }
+    #play-pause:hover { background: #a0294a; transform: scale(1.05); }
+    .player-info { flex: 1; min-width: 0; }
+    .player-title { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--vinho); }
+    .player-sub   { font-size: 12px; color: var(--texto-sec); margin-top: 2px; }
+    .progress-wrap { flex: 2; display: flex; align-items: center; gap: .7rem; }
+    #progress {
+      flex: 1; height: 4px; -webkit-appearance: none; appearance: none;
+      background: var(--rosa-med); border-radius: 2px; cursor: pointer; outline: none;
+    }
+    #progress::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--rosa); cursor: pointer;
+    }
+    .time { font-size: 12px; color: var(--texto-sec); white-space: nowrap; min-width: 80px; text-align: right; }
+    #letra { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 2rem; }
+    #letra h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4vw, 36px); color: var(--vinho); margin-bottom: 2.5rem;
+    }
+    .stanza {
+      margin-bottom: 2.2rem; padding: 1.4rem 1.8rem;
+      border-radius: 16px; border: 0.5px solid transparent;
+      transition: background .4s, border-color .4s, box-shadow .4s;
+    }
+    .stanza .part-label {
+      font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--texto-sec); margin-bottom: .6rem; font-weight: 500;
+    }
+    .stanza p {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; line-height: 2; color: var(--vinho);
+    }
+    .stanza.active {
+      background: var(--rosa-claro);
+      border-color: var(--rosa-med);
+      box-shadow: 0 4px 24px rgba(194,51,90,.08);
+    }
+    .stanza.active .part-label { color: var(--rosa); }
+    .stanza.chorus p { font-weight: 600; }
+    .stanza.chorus.active {
+      background: var(--rosa); border-color: var(--rosa);
+    }
+    .stanza.chorus.active .part-label { color: rgba(255,255,255,.7); }
+    .stanza.chorus.active p { color: #fff; }
+    #final-section {
+      max-width: 680px; margin: 2rem auto 6rem;
+      background: var(--rosa-claro); border-radius: 24px;
+      padding: 3.5rem 3rem; text-align: center;
+      border: 0.5px solid var(--rosa-med);
+    }
+    #final-section blockquote {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: clamp(17px, 3vw, 24px); line-height: 1.8;
+      color: var(--vinho); margin: 1rem 0;
+    }
+    #final-section .assinatura { font-size: 14px; color: var(--rosa); font-weight: 500; margin-top: 1.2rem; }
+    footer {
+      text-align: center; padding: 2rem;
+      font-size: 13px; color: var(--texto-sec);
+      border-top: 0.5px solid var(--rosa-med);
+    }
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      #player-bar { padding: .8rem 1rem; }
+      .progress-wrap { flex: 1; }
+      #final-section { padding: 2.5rem 1.5rem; margin: 2rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">♡ Meu Amor</div>
+  <ul>
+    <li><a href="#letra">Letra</a></li>
+    <li><a href="#final-section">Mensagem</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hearts-bg" id="hbg"></div>
+  <p class="eyebrow">Dia dos Namorados · 12 de junho</p>
+  <h1>Meu <em>amor</em></h1>
+  <p class="sub">Uma música feita pra você — com tudo o que sinto.</p>
+  <a href="#letra" class="cta" id="hero-play">Ouvir agora ♡</a>
+</section>
+
+<div id="player-bar">
+  <button id="play-pause" aria-label="Play/Pause">▶</button>
+  <div class="player-info">
+    <div class="player-title">Meu Amor</div>
+    <div class="player-sub" id="current-part">Clique para começar</div>
+  </div>
+  <div class="progress-wrap">
+    <input type="range" id="progress" min="0" max="100" value="0" step="0.1" />
+    <span class="time" id="time-display">0:00 / --:--</span>
+  </div>
+  <audio id="audio" src="Meu_amor_homem_.mp3" preload="auto"></audio>
+</div>
+
+<section id="letra">
+  <h2>Letra</h2>
+
+  <div class="stanza" data-start="0" data-end="14" data-label="Verso 1">
+    <div class="part-label">Verso 1</div>
+    <p>
+      Eu me apaixonei no brilho do teu olhar<br>
+      Naquele jeito que você sorri sem perceber<br>
+      Quando conquista alguma coisa que sonhou alcançar<br>
+      Seu rosto ilumina o mundo inteiro pra eu ver
+    </p>
+  </div>
+
+  <div class="stanza" data-start="14" data-end="28" data-label="Verso 1 (cont.)">
+    <div class="part-label">Verso 1 (cont.)</div>
+    <p>
+      Eu amo teu jeitinho de pedir com biquinho<br>
+      Sabendo que eu vou acabar fazendo o que quiser<br>
+      Mandona, mimada, cheia dos seus caprichinhos<br>
+      Eu amo cada um deles porque vêm de você
+    </p>
+  </div>
+
+  <div class="stanza" data-start="28" data-end="46" data-label="Pré-Refrão">
+    <div class="part-label">Pré-Refrão</div>
+    <p>
+      Eu amo quando me chama de amor<br>
+      Quando diz que me ama mais<br>
+      Quando a saudade aperta e você liga<br>
+      Pedindo pra eu correr pra te encontrar
+    </p>
+  </div>
+
+  <div class="stanza chorus" data-start="46" data-end="90" data-label="Refrão">
+    <div class="part-label">Refrão</div>
+    <p>
+      Porque você é a mulher mais linda que eu já vi<br>
+      O sorriso mais bonito que existe por aqui<br>
+      Seus braços são meu lar, seu abraço é meu lugar<br>
+      E se eu pudesse eu te dava o mundo inteiro<br>
+      Mas eu prefiro construir ele ao teu lado<br>
+      Dia após dia, coração entrelaçado<br>
+      Se existe destino, eu já encontrei o meu<br>
+      No instante em que o teu coração encontrou o meu
+    </p>
+  </div>
+
+  <div class="stanza" data-start="90" data-end="104" data-label="Verso 2">
+    <div class="part-label">Verso 2</div>
+    <p>
+      A gente conversa até pegar no sono<br>
+      E quando acorda quer ficar juntinho outra vez<br>
+      Cada beijo, cada toque, cada momento nosso<br>
+      É um capítulo da história mais bonita que eu já fiz
+    </p>
+  </div>
+
+  <div class="stanza" data-start="104" data-end="118" data-label="Verso 2 (cont.)">
+    <div class="part-label">Verso 2 (cont.)</div>
+    <p>
+      Você me levou pra mundos que eu nem conhecia<br>
+      K-pop, divas pop e rolês pela cidade<br>
+      Cartinhas Pokémon, crochê, maratonas de Glee<br>
+      E hoje eu amo tudo porque tem você em cada detalhe
+    </p>
+  </div>
+
+  <div class="stanza" data-start="118" data-end="136" data-label="Pré-Refrão">
+    <div class="part-label">Pré-Refrão</div>
+    <p>
+      E quando o ciúme bate e você cola em mim<br>
+      Eu só sorrio porque sei o quanto me ama<br>
+      Você me inspira com tua inteligência<br>
+      E me faz querer ser melhor a cada manhã
+    </p>
+  </div>
+
+  <div class="stanza chorus" data-start="136" data-end="182" data-label="Refrão">
+    <div class="part-label">Refrão</div>
+    <p>
+      Porque você é a mulher mais linda que eu já vi<br>
+      O sorriso mais bonito que existe aqui<br>
+      Seus braços são meu lar, seu abraço é meu lugar<br>
+      E se eu pudesse eu te dava o mundo inteiro<br>
+      Mas eu prefiro construir tudo ao teu lado<br>
+      Dia após dia, coração entrelaçado<br>
+      Se existe destino, eu já encontrei o meu<br>
+      No instante em que o teu coração encontrou o meu
+    </p>
+  </div>
+
+  <div class="stanza" data-start="182" data-end="196" data-label="Ponte">
+    <div class="part-label">Ponte</div>
+    <p>
+      E quando você diz que não se acha bonita<br>
+      Meu coração até aperta sem querer<br>
+      Porque eu vejo uma mulher incrível, forte e rara<br>
+      A mais interessante que eu poderia conhecer
+    </p>
+  </div>
+
+  <div class="stanza" data-start="196" data-end="212" data-label="Ponte (cont.)">
+    <div class="part-label">Ponte (cont.)</div>
+    <p>
+      Se você fosse um anjo, seria rainha<br>
+      E se fosse rainha, seria anjo também<br>
+      Eu quero envelhecer ouvindo tua risada<br>
+      Segurando tua mão por mais de cem anos, meu bem
+    </p>
+  </div>
+
+  <div class="stanza chorus" data-start="212" data-end="248" data-label="Refrão Final">
+    <div class="part-label">Refrão Final</div>
+    <p>
+      Porque você é a mulher mais linda que eu já vi<br>
+      O sorriso mais bonito que existe aqui<br>
+      Seus braços são meu lar, seu abraço é meu lugar<br>
+      E se eu pudesse eu te dava o mundo inteiro<br>
+      Mas eu prefiro construir tudo ao teu lado<br>
+      Dia após dia, coração entrelaçado<br>
+      Se existe destino, eu já encontrei o meu<br>
+      No instante em que o teu coração encontrou o meu
+    </p>
+  </div>
+
+  <div class="stanza" data-start="248" data-end="999" data-label="Final">
+    <div class="part-label">Final</div>
+    <p>
+      Então amor, fica comigo pro resto da vida<br>
+      Vamos colecionar momentos como quem coleciona estrelas<br>
+      Porque eu nunca amei ninguém<br>
+      nem perto do quanto amo você.
+    </p>
+  </div>
+</section>
+
+<div id="final-section">
+  <p style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rosa);margin-bottom:.6rem;">Para você</p>
+  <blockquote>
+    "Seus braços são meu lar,<br>seu abraço é meu lugar."
+  </blockquote>
+  <p class="assinatura">Com todo o amor do mundo ❤️</p>
+</div>
+
+<footer>Feito com amor · Dia dos Namorados · 12 de junho</footer>
+
+<script>
+  const hbg = document.getElementById('hbg');
+  const emojis = ['❤️','💕','💖','🌹','💗','✨','🌸'];
+  for (let i = 0; i < 20; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart-float';
+    h.textContent = emojis[i % emojis.length];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.fontSize = (12 + Math.random() * 16) + 'px';
+    h.style.animationDuration = (8 + Math.random() * 10) + 's';
+    h.style.animationDelay = (Math.random() * 12) + 's';
+    hbg.appendChild(h);
+  }
+
+  const audio    = document.getElementById('audio');
+  const btn      = document.getElementById('play-pause');
+  const progress = document.getElementById('progress');
+  const timeDisp = document.getElementById('time-display');
+  const curPart  = document.getElementById('current-part');
+  const stanzas  = Array.from(document.querySelectorAll('.stanza'));
+
+  function fmt(s) {
+    if (!s || isNaN(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2,'0');
+    return m + ':' + sec;
+  }
+
+  btn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); btn.textContent = '⏸'; }
+    else              { audio.pause(); btn.textContent = '▶'; }
+  });
+
+  document.getElementById('hero-play').addEventListener('click', (e) => {
+    e.preventDefault();
+    audio.play(); btn.textContent = '⏸';
+    document.getElementById('letra').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const t = audio.currentTime;
+    const d = audio.duration;
+    if (d) {
+      progress.value = (t / d) * 100;
+      timeDisp.textContent = fmt(t) + ' / ' + fmt(d);
+    }
+    let active = null;
+    stanzas.forEach(s => {
+      const start = parseFloat(s.dataset.start);
+      const end   = parseFloat(s.dataset.end);
+      if (t >= start && t < end) active = s;
+      s.classList.remove('active');
+    });
+    if (active) {
+      active.classList.add('active');
+      curPart.textContent = active.dataset.label;
+      const rect = active.getBoundingClientRect();
+      if (rect.top < 120 || rect.bottom > window.innerHeight - 40) {
+        active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  });
+
+  progress.addEventListener('input', () => {
+    const d = audio.duration;
+    if (d) audio.currentTime = (progress.value / 100) * d;
+  });
+
+  audio.addEventListener('ended', () => { btn.textContent = '▶'; });
+</script>
+</body>
+</html>
